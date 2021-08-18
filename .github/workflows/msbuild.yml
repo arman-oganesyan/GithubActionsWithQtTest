@@ -24,6 +24,21 @@ jobs:
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+      
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2
+      with:
+        version: '5.15.2'
+        host: 'windows'
+        target: 'desktop'
+        arch: 'win64_msvc2019_64'
+        dir: '${{ github.workspace }}/example/'
+        install-deps: 'true'
+        modules: ''
+        cached: 'false'
+        setup-python: 'true'
+        set-env: 'false'
+        tools-only: 'false'
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
